@@ -176,3 +176,28 @@ const concluirAtividade = (event) => {
 
     atividade.finalizada = !atividade.finalizada
 }
+
+//scrollReveal
+ScrollReveal().reveal('#place', {
+    origin: 'left',
+    duration: 2000,
+    distance: '20%'
+});
+
+ScrollReveal().reveal('.field-wrapper', {
+    origin: 'left',
+    duration: 1000,
+    distance: '20%'
+})
+
+ScrollReveal().reveal('button', {
+    origin: 'left',
+    duration: 1000,
+    distance: '20%'
+})
+
+ScrollReveal().reveal('main', {
+    origin: 'right',
+    duration: 1000,
+    distance: '20%'
+})
