@@ -1,4 +1,3 @@
-// biblioteca e código de terceiros
 const formatador = (data) => {
     return {
         dia: {
@@ -13,14 +12,12 @@ const formatador = (data) => {
     }
 }
 
-// object
 const atividade = {
     nome: 'Almoço',
     data: new Date('2024-07-08 10:00'),
     finalizada: true
 }
 
-// lista, array, vetor []
 let atividades = [
     atividade,
     {
@@ -35,11 +32,7 @@ let atividades = [
     },
 ]
 
-// atividades = []
-
-// arrow function
 const criarItemDeAtividade = (atividade) => {
-
     let input = `
         <input 
         onchange="concluirAtividade(event)"
@@ -90,7 +83,6 @@ const atualizarListaDeAtividades = () => {
     const section = document.querySelector("section")
     section.innerHTML = ''
 
-    // verificar se minha lista está vazia
     if (atividades.length == 0) {
         section.innerHTML = "<p>Nenhuma atividade cadastrada.</p>"
         return
@@ -114,12 +106,12 @@ const salvarAtividade = (event) => {
 
     const novaAtividade = {
         nome: nome,
-        data: new Date(data),  // Corrigir aqui para comparar datas corretamente
+        data: new Date(data),
         finalizada: false
     }
 
     const atividadeExiste = atividades.find((atividade) => {
-        return atividade.data.getTime() === novaAtividade.data.getTime(); // Corrigido para comparação de datas
+        return atividade.data.getTime() === novaAtividade.data.getTime();
     })
 
     if (atividadeExiste) {
@@ -130,32 +122,27 @@ const salvarAtividade = (event) => {
     atualizarListaDeAtividades()
 }
 
+// Função para criar seleção de dias dinamicamente
 const criarDiasSelecao = () => {
-    const dias = [
-        '2024-02-28',
-        '2024-02-29',
-        '2024-03-01',
-        '2024-03-02',
-        '2024-03-03',
-    ]
+    const diasSelecao = [];
+    const hoje = dayjs(); // Data de hoje
 
-    let diasSelecao = ''
+    // Criar opções para os próximos 14 dias
+    for (let i = 0; i < 14; i++) {
+        const dia = hoje.add(i, 'day'); // Adicionar dias ao dia atual
+        const formatar = formatador(dia);
 
-    for (let dia of dias) {
-        const formatar = formatador(dia)
         const diaFormatado = `
-        ${formatar.dia.numerico} de
-        ${formatar.mes}
+        ${formatar.dia.numerico} de ${formatar.mes}
         `
-        diasSelecao += `
-            <option value="${dia}">${diaFormatado}</option>
-        `
+        diasSelecao.push(`
+            <option value="${dia.format('YYYY-MM-DD')}">${diaFormatado}</option>
+        `);
     }
 
     document
         .querySelector('select[name="dia"]')
-        .innerHTML = diasSelecao
-
+        .innerHTML = diasSelecao.join('')
 }
 criarDiasSelecao()
 
@@ -180,7 +167,7 @@ const concluirAtividade = (event) => {
     const dataDesteInput = input.value
 
     const atividade = atividades.find((atividade) => {
-        return atividade.data.getTime() === new Date(dataDesteInput).getTime(); // Corrigido para comparação de datas
+        return atividade.data.getTime() === new Date(dataDesteInput).getTime();
     })
 
     if (!atividade) {
