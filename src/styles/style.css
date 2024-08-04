@@ -56,14 +56,14 @@ input, select, button {
 }
 
 .field-wrapper:focus-within {
-    outline: 2px solid yellowgreen;
+    outline: 2px solid #F66139;
 }
 
 button {
     margin-top: 12px;
     border: none;
     padding: 12px 20px;
-    background-color: #aff445;
+    background-color: #F66139;
     border-radius: 8px;
 
     font-weight: bold;
@@ -177,6 +177,9 @@ section .card-bg {
 
 @keyframes appear {
     from {
-        opacity: 0;
-    }
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
